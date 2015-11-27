@@ -26,7 +26,7 @@ func newAvl() *Avl {
 }
 func Vacio(r *nodo) bool { return r == nil }
 
-func (a *Avl) Insertar(x int) {
+func (a *Avl) Insert(x int) {
 	aux := a.actual
 	aux = nil
 	a.actual = a.raiz
@@ -262,10 +262,10 @@ func (a *Avl) RSI(nodo *nodo) {
 	P.FE = 0
 	Q.FE = 0
 } //funciones de busqueda
-func (a *Avl) Buscar(x int) bool {
+func (a *Avl) Search(x int) bool {
 	return a.raiz.Buscar(x)
 }
-func (n *nodo) Buscar(x int) bool {
+func (n *nodo) Search(x int) bool {
 	if n == nil {
 		return false
 	}
@@ -273,9 +273,9 @@ func (n *nodo) Buscar(x int) bool {
 		return true
 	}
 	if x <= n.dato {
-		return n.left.Buscar(x)
+		return n.left.Search(x)
 	}
-	return n.right.Buscar(x)
+	return n.right.Search(x)
 }
 func preorder(nodo *nodo) {
 	if nodo == nil {
