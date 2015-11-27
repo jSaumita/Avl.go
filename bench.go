@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
-
+	"github.com/jSaumita/Avl.go"
 	st "github.com/jSaumita/Avl.go/Avl.go"
 )
 
