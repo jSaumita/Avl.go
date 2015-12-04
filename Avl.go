@@ -4,7 +4,18 @@
 
 package main
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+var n int
+
+func init() {
+	flag.IntVar(&n, "n", 10000, "Number of elements to insert")
+}
 
 const (
 	LEFT  = 1
@@ -263,7 +274,7 @@ func (a *Avl) RSI(nodo *nodo) {
 	Q.FE = 0
 } //funciones de busqueda
 func (a *Avl) Search(x int) bool {
-	return a.raiz.Buscar(x)
+	return a.raiz.Search(x)
 }
 func (n *nodo) Search(x int) bool {
 	if n == nil {
@@ -286,10 +297,40 @@ func preorder(nodo *nodo) {
 	preorder(nodo.right)
 }
 func main() {
-	a := newAvl()
-	for i := 1; i < 17; i++ {
-		a.Insertar(i)
+	// a := newAvl()
+	// for i := 1; i < 17; i++ {
+	// 	a.Insertar(i)
+	// }
+	// preorder(a.raiz)
+	flag.Parse()
+	elements := make([]int, n)
+	for i := range elements {
+		elements[i] = rand.Int()
 	}
-	preorder(a.raiz)
+
+	ini := time.Now()
+	var t *Avl
+	t = newAvl()
+	d := time.Now().Sub(ini)
+	fmt.Printf("Tree created [%v]\n", d)
+
+	fmt.Printf("Inserting data")
+	ini = time.Now()
+	for _, v := range elements {
+		t.Insert(v)
+	}
+	d = time.Now().Sub(ini)
+	fmt.Printf(" [%v]\n", d)
+
+	fmt.Printf("Searching data")
+	ini = time.Now()
+	for _, v := range elements {
+		if !t.Search(v) {
+			fmt.Printf(" ... FAILED!\n")
+			fmt.Printf("%d wasn't found!!\n", v)
+		}
+	}
+	d = time.Now().Sub(ini)
+	fmt.Printf(" [%v]\n", d)
 
 }
